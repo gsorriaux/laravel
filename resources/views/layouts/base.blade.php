@@ -34,6 +34,9 @@
                 <li class="nav-item mx-5">
                     <a class="nav-link" href="/addAuthor">Ajouter Auteur</a>
                 </li>
+                <li class="nav-item mx-5">
+                    <a class="nav-link" href="/addGenre">Ajouter Genre</a>
+                </li>
             </ul>
         </nav>
 {{-- 

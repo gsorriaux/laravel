@@ -25,10 +25,15 @@
             <label for="description">Description du livre</label>
             <input type="text" name="description" class="form-control" required>
         </div>
-    
+        
         <div class="form-group">
-            <label for="genre">Genre</label>
-            <input type="text" name="genre" class="form-control" required>
+            <legend class="col-form-label">Genre :</legend>
+            @foreach ($genres as $genre)
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="genres[]" value="{{$genre->id}}">
+                    <label class="form-check-label" for="genre{{$genre->id}}">{{$genre->name}}</label>
+                </div>
+            @endforeach
         </div>
     
         <div class="form-group">

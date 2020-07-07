@@ -10,6 +10,12 @@ class Book extends Model
     {
         return $this->belongsTo('App\Author');
     }
+    
+    public function genres()
+    {
+        return $this->belongsToMany('App\Genre');
+    }
+
     public static function getAll()
     {
         return Book::all();
@@ -20,9 +26,12 @@ class Book extends Model
         $book->titre = $request->titre;
         $book->author_id = $request->auteur;
         $book->description = $request->description;
-        $book->genre = $request->genre;
         $book->année_de_parution = $request->annee;
         $book->save();
+
+        foreach($request->genres as $genre){
+            $book->genres()->attach($genre);
+        };  
         return;
     }
 
@@ -30,9 +39,18 @@ class Book extends Model
     {
         return Book::destroy($id);
     }
-    public static function updateBook($data)
+    public static function updateBook($request)
     {
-        return Book::find($data['id'])->update($data);
+        $book = Book::find($request->id);
+        $book->titre = $request->titre;
+        $book->author_id = $request->auteur;
+        $book->description = $request->description;
+        $book->année_de_parution = $request->annee;
+        $book->save();
+        
+        $book->genres()->sync($request->genres);
+        
+        return;
     }
     protected $fillable = ['titre', 'author_id', 'description', 'genre', 'année_de_parution'];
 }

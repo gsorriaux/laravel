@@ -29,11 +29,16 @@ Route::post('/add', 'ActionController@addOne');
 Route::get('/addAuthor', 'NavController@addAuthor');
 Route::post('/addAuthor', 'ActionController@addOneAuthor');
 
+Route::get('/addGenre', 'NavController@addGenre');
+Route::post('/addGenre', 'ActionController@addOneGenre');
+
 Route::get('/supp', 'NavController@supp');
 Route::post('/supp', 'ActionController@deleteBook');
 
 Route::post('/suppAuthor', 'ActionController@deleteAuthor');
+Route::post('/suppGenre', 'ActionController@deleteGenre');
 
 Route::post('/update', 'ActionController@updateBook');
 Route::post('/updateAuthor', 'ActionController@updateAuthor');
+Route::post('/updateGenre', 'ActionController@updateGenre');
 

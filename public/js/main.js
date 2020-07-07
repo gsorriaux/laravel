@@ -28,8 +28,10 @@ $('#deleteBook').on('show.bs.modal', function (event) {
     var auteur = button.data('auteur')
     var bookId = button.data('bookid')
     var description = button.data('description')
-    var genre = button.data('genre')
+    var genres = button.data('genre')
     var annee = button.data('annee')
+    console.log(genres);
+    
 
 
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -41,7 +43,23 @@ $('#deleteBook').on('show.bs.modal', function (event) {
     modal.find('input[type=text][name=titre]').val(titre)
     modal.find('select[name=auteur]').val(auteur)
     modal.find('input[type=text][name=description]').val(description)
-    modal.find('input[type=text][name=genre]').val(genre)
+    var inputs = modal.find('input[type=checkbox]')
+    console.log(inputs);
+
+    modal.find('input[type=checkbox]').each(inputs, function( key, value ) {
+      genres.forEach(genre => {
+        if (genre.id == value.value) {
+          value.checked = true;
+        }
+      });
+      console.log( key + ": " + value.value );
+    });
+     
+
+
+
+    
+
     modal.find('input[type=number][name=annee]').val(annee)
   })
 

@@ -16,16 +16,19 @@
             <th>Supprimer</th>
         </tr>
     </thead>
-    
     @foreach ($books as $book)
     <tr>
         <td>{{ $book->titre}}</td>
         <td>{{ $book->description}}</td>
         <td>{{ $book->author->name}}</td>
-        <td>{{ $book->genre}}</td>
+        <td>
+            @foreach ($book->genres as $genre)
+                <li>{{ $genre->name}}</li>
+            @endforeach
+        </td>
         <td>{{ $book->année_de_parution}}</td>
         <td>               
-            <button class="btn btn-outline-info" data-toggle="modal" data-target="#editBook" data-titre="{{$book->titre}}" data-auteur="{{$book->author->id}}" data-bookid="{{$book->id}}" data-description="{{ $book->description}}" data-genre="{{ $book->genre}}" data-annee="{{ $book->année_de_parution}}">Editer</button>
+            <button class="btn btn-outline-info" data-toggle="modal" data-target="#editBook" data-titre="{{$book->titre}}" data-auteur="{{$book->author->id}}" data-bookid="{{$book->id}}" data-description="{{ $book->description}}" data-genre="{{ $book->genres}}" data-annee="{{ $book->année_de_parution}}">Editer</button>
         </td>
         <td>
             <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteBook" data-titre="{{$book->titre}}" data-auteur="{{$book->author->name}}" data-bookid="{{$book->id}}">X</button>
@@ -105,8 +108,15 @@
                     </div>
                     <label for="description">Description :</label>
                     <input type="text" class="py-2" name="description" value="" required>
-                    <label for="genre">Genre :</label>
-                    <input type="text" class="py-2" name="genre" value="" required>
+                    <div class="form-group" id="check">
+                        <legend class="col-form-label">Genre :</legend>
+                        @foreach ($genres as $genre)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres[]" value="{{$genre->id}}">
+                                <label class="form-check-label" for="genre{{$genre->id}}">{{$genre->name}}</label>
+                            </div>
+                        @endforeach
+                    </div>
                     <label for="annee">Année de parution :</label>
                     <input type="number" class="py-2" name="annee" value="" required>
                     <button type="submit" class="btn btn-primary btn-lg">Editer</button>
